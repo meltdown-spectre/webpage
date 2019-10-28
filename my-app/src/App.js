@@ -37,7 +37,6 @@ class Main extends React.Component{
         <Container>
           <Sidebar />
           <Title />
-          <p>{intro}</p>
         </Container>
       </div>
     );
@@ -49,8 +48,13 @@ class Title extends React.Component{
     return(
       <div>
         <header class="Headers"> Meltdown Spectre Attack</header>
-        <p>The purpose of this tool is to educate meltdown/spectre</p>
-      
+        <p>The purpose of this tool is to educate meltdown/spectre. Please click on the Menu 
+          button on the bottom left corner to navigate through the topics.
+          <div class = "SubHeader">
+            Summary
+          </div>
+          To Do
+        </p>
       </div>
     )
   }
