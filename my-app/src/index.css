@@ -11,6 +11,13 @@
   font-size: 20px;
   padding-top: 20px;
 }
+.SubHeaderHome{
+  color: orange;
+  font-size: 40px;
+  padding-top: 20px;
+  margin-left: 90px;
+  text-align: left;
+}
 .Picture{
   margin-left:100px;
   width: 500px;
@@ -87,4 +94,53 @@ p {
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 
+}
+
+.meltdown_logo {
+  height: 200px;
+  width: 200px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left : 80px;
+}
+.spectre_logo {
+  height: 200px;
+  width: 250px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left : 70px;
+
+}
+
+.Meltdown_column{
+  margin-left: 100px;
+  float:left;
+  height:500px;
+  width:35%;
+}
+
+.Spectre_column{
+  margin-right: 200px;
+  float:right;
+  height:500px;
+  width:35%;
+}
+
+.title-container{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.end-container{
+  margin-top: 20px;
+}
+.Meltdown_header{
+  text-align: center;
+  margin-top : 10px;
+  margin-bottom: 30px;
+}
+.Spectre_header{
+  text-align: center;
+  margin-top : 10px;
+  margin-bottom: 30px;
 }
