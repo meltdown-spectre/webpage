@@ -1,6 +1,4 @@
 import React from 'react';
-import { elastic as Menu } from 'react-burger-menu';
-import { BrowserRouter as Switch, Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Cachepic from './resources/Cache_pic.png';
 import CacheDatapic from './resources/Cache_dataflow_pic.png';
