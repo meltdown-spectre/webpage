@@ -47,7 +47,7 @@ class Cache extends React.Component {
                             into the cache to find it quicker the next time. 
                             
                             <img class="Picture2" src={CacheDatapic} alt="Cache_dataflow_pic"></img>
-                
+                        
                          </p>
                     </div>
                 </div>
