@@ -40,6 +40,13 @@ class OutOfOrder extends React.Component {
                     6. Only after all older instructions have their results written back 
                     to the register file, then this result is written back to the register file. 
                     This is called the graduation or retire stage <br></br>
+                <div class="SubHeader">
+                    Dynamic schedule
+                </div>
+                After the instruction is decoded it is checked for structural and data hazards. Structural hazards
+                occur if a functional unit is not available and therefore the instruction has to be stalled.
+                Data hazards include the condition if an instruction can't be issued due to missing operands that have
+                yet to be calculated.
 </p>
             </div>
             </div>

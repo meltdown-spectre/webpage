@@ -13,7 +13,7 @@ class VM extends React.Component {
                     <Sidebar />
                 </div>
                 <div>
-                    <header className="Headers">Virtual Memory</header>
+                    <header className="Headers">Virtual memory</header>
                     <p>Virtual Memory (short: VM) is a storage concept that supported in most common computers nowadays.
                        It describes the actual storage available for a process independent from its adress
                        space. On the other hand you have the physical memory what describes the actual storage size available
