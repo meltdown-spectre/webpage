@@ -2,6 +2,17 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Cachepic from './resources/Cache_pic.png';
 import CacheDatapic from './resources/Cache_dataflow_pic.png';
+import posed, { PoseGroup } from 'react-pose';
+
+const P = posed.p({
+    enter: { x: 0, opacity: 1 },
+    exit: { x: 50, opacity: 0 }
+  });
+
+const Img = posed.img({
+    enter: { x: 0, opacity: 1 },
+    exit: { x: 50, opacity: 0 }
+})
 
 class Cache extends React.Component {
     render() {
@@ -12,7 +23,7 @@ class Cache extends React.Component {
                 </div>
                 <div>
                     <header class="Headers ">Cache</header>
-                    <p>The Cache is a small static memory usually inside or very close to the CPU. It stores information
+                    <P>The Cache is a small static memory usually inside or very close to the CPU. It stores information
                         that are most likely to need next by the CPU. Which information is loaded in the Cache depends
                         on certain algorithms and assumptions. The main goal of the Cache is to provide the next bit of
                         data to the CPU it will need.
@@ -33,10 +44,10 @@ class Cache extends React.Component {
                     </div>
                         L3-cache has a size of 4MByte and 50 MByte and is the lowest of the three caches.
                         It stores data that is usually shared among all cores.
-                    </p>
+                    </P>
                     <div >
-                        <img class="Picture" src={Cachepic} alt="Cache_pic"></img>
-                        <p> A cache is further partitioned into blocks. No matter whether a cache is read
+                        <Img class="Picture" src={Cachepic} alt="Cache_pic"></Img>
+                        <P> A cache is further partitioned into blocks. No matter whether a cache is read
                             or written, it's done one block at a time. Each block has a tag that includes
                             the location where the block is stored in the cache.
                             When data is requested, the CPU starts with looking through the tags to find 
@@ -46,9 +57,9 @@ class Cache extends React.Component {
                             If the data isn't found at all, the CPU will look in the RAM and write the data 
                             into the cache to find it quicker the next time. 
                             
-                            <img class="Picture2" src={CacheDatapic} alt="Cache_dataflow_pic"></img>
+                            <Img class="Picture2" src={CacheDatapic} alt="Cache_dataflow_pic"></Img>
                 
-                         </p>
+                         </P>
                     </div>
                 </div>
             </div>
