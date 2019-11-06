@@ -1,6 +1,6 @@
 import React from 'react';
 import { elastic as Menu } from 'react-burger-menu';
-import { Router, Link, Location } from '@reach/router';
+import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
 class Sidebar extends React.Component {
     render() {

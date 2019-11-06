@@ -56,10 +56,10 @@ class Cache extends React.Component {
                             describes the situation where your data is successfully served from the cache.
                             If the data isn't found at all, the CPU will look in the RAM and write the data 
                             into the cache to find it quicker the next time. 
-                            
                             <Img class="Picture2" src={CacheDatapic} alt="Cache_dataflow_pic"></Img>
-                
                          </P>
+
+
                     </div>
                 </div>
             </div>
