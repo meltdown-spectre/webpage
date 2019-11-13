@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 const phase0 = "This is a short animation on how the meltdown attack works, "
 const phase1 = "Notice how the out of order execution executes at almost the same time"
-const phase2 = "Notice how the timing for cache retrieval is alot faster than from Main Memory. By timing the retrieval, we can know which array access was from the cache."
+const phase2 = "Notice how the timing for cache retrieval is alot faster than from Main Memory therefore we know which array access was from the cache."
 
 class Meltdown extends React.Component{
     render(){
@@ -26,12 +26,14 @@ class Meltdown extends React.Component{
                   read and privilege check. This opens up the possibility for a program to read 
                   memory you have no privilege to access. For example, a user process that is vulnerable 
                   to Meltdown will be able to access the kernel memory, which should be impossible under 
-                  normal circumstances.
+                  normal circumstances.<br></br>
+                  <br></br>
                   Meltdown is not an exploitation of software vulnerability. Instead, it is an exploitation 
                   of side-channel information that is available on most modern processors. An attacker 
                   with access to the vulnerable processor will be able to exploit the information in it by 
                   running a malicious program to retrieve a dump of the entire kernel address space and mapped 
                   physical memory. <br></br>
+                  <br></br>
                   So why is Meltdown dangerous? The kernel stores encryption keys, passwords or even physical 
                   pages of other processes. These sensitive data will be compromised due to Meltdown and other 
                   users could potentially use these sensitive information to cause harm to others or to the user 
@@ -45,10 +47,12 @@ class Meltdown extends React.Component{
                   leak the secret. In the first block, these instructions are known as transient instructions and 
                   they occur almost all the time. To maximise performance, the CPU will constantly execute instructions
                   ahead of the current instruction. As such, this brings about a side channel vulnerability if the instructions 
-                  executed relies on a secret value. [1] As mentioned previously, kernel memory is not accessible by user processes 
+                  executed relies on a secret value. As mentioned previously, kernel memory is not accessible by user processes 
                   and an unprivileged access to it by the process will cause an exception to be thrown. This exception thrown 
-                  could be dealt with using exception handling or suppression. A malicious attacker can handle the exception by 
-                  installing a signal handler to catch a specific exception and runs his code to prevent the process from terminating. 
+                  could be dealt with using exception handling or suppression. <br></br>
+                  A malicious attacker can handle the exception by installing a signal handler to catch a specific exception 
+                  and runs his code to prevent the process from terminating.<br></br>
+                  <br></br>
                   In the next segment of the attack, due to the (speculative) execution of the instruction that should not have occurred, 
                   there might be a change in the architectural state such as the state of the cache. This change in state will then be passed 
                   through a covert channel and the attacker will be able to deduce what the leaked secret is.
@@ -150,10 +154,7 @@ class Meltdown extends React.Component{
                   We combine these two parts to get the meltdown attack. In order to demonstrate this attack, 
                   we planted a secret value inside the kernel using procfs. We will then read the planted secret 
                   from a user-level process using the same techniques above. <br></br>
-                  <br></br>
-                  The full demonstration code can be seen in Appendix A. <br></br>
-                  We included several optimizations in the code (Refer to Appendix A) to increase the chances of a correct read.
-                  </p>
+                      </p>
             </div>
             <Explanation />
         </div>
@@ -263,7 +264,6 @@ class Explanation extends React.Component{
   render(){
     return(
       <div className="anime_container">
-        <img src={this.state.anime_src} className="anime" alt="animation_gif"></img>
         <div className="nav_container">
           <div className="nav_button">
             <Button className="nav_buttons"onClick={this.handleBackClick} variant="light" >
@@ -271,7 +271,7 @@ class Explanation extends React.Component{
             </Button>
           </div>
           <div className="Explanation_box">
-            <p className="Explanation">{this.state.explanation}</p>
+            <p >{this.state.explanation}</p>
           </div>
           <div className="nav_button">
             <Button className="nav_buttons"onClick={this.handleClick} variant="light" >
@@ -279,6 +279,7 @@ class Explanation extends React.Component{
             </Button>
           </div>
         </div>
+        <img src={this.state.anime_src} className="MeltdownAnime" alt="animation_gif"></img>
       </div>
       
     )

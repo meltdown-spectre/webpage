@@ -35,6 +35,7 @@
 .Picture4{
   width: 500px;
   height: 500px;
+  margin-left: 200px;
 }
 .code{
   font-size: 20px;
@@ -201,11 +202,17 @@ p {
 }
 
 .anime{
-  width: 900px;
-  height: 700px;
+  width: 600px;
+  height: 400px;
   position:relative;
-  border-color:red;
-  margin-left:200px;
+  margin-left:180px;
+  margin-bottom: 100px;
+}
+.MeltdownAnime{
+  width: 500px;
+  height: 300px;
+  margin-left:350px;
+  margin-bottom: 100px;
 }
 .nav-container{
   display:flex;
@@ -217,14 +224,13 @@ p {
 }
 .Explanation_box{
   background:lightblue;
-  border-color:red;
   float:left;
-  width:600px;
-  height:200px;
-}
-.Explanation{
+  width:800px;
+  height:100px;
   text-align: center;
+  margin-top: 0px;
 }
+
 i {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -240,9 +246,11 @@ i {
   -webkit-transform: rotate(135deg);
 }
 .nav_container{
-  margin-left : 100px;
+  margin-left : 150px;
 }
 .nav_buttons{
   width:10px;
-  height:200px;
+  height:100px;
+  margin-bottom: 50px;
+  
 }

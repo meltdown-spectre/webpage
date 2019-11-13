@@ -25,7 +25,7 @@ class Spectre extends React.Component {
             Instead, Spectre requires tailoring to the user process’s software environment. 
             This attack generally affects CPUs that support speculative execution. 
             To recall, Spectre attacks mislead processors to undergo speculative execution 
-            that should not have been executed under normal circumstances. (Section 1) 
+            that should not have been executed under normal circumstances.
             This section will provide a more in-depth look into the Spectre attacks.
           <div class="SubHeader">
            Description
@@ -41,9 +41,9 @@ class Spectre extends React.Component {
           
           Although this speculative execution will be reverted back eventually, the effect of this execution 
           is similar to that of Meltdown. There will be microarchitectural changes made to components such 
-          as the cache and the leaked data can then be retrieved using the Flush + Reload method mentioned in the previous section. <br></br>
+          as the cache and the leaked data can then be retrieved using the Flush + Reload method mentioned in the "Meltdown" section. <br></br>
 
-          The above describes how Spectre attacks work in general. Now, we will now delve deeper into the more 
+          The above describes how Spectre attacks work in general. Now, we will go deeper into the more 
           common variants of Spectre: Variant 1, Variant 2 and Variant 4. <br></br>
 
           <div class="SubHeader">
@@ -164,7 +164,7 @@ class Spectre extends React.Component {
           By running the file in Appendix B, we are able to extract the “secret” as seen in Figure XX. <br></br>
           <br></br>
           <img class="Picture4" src={SpectreCode} alt="SpectreCode"></img>
-          <br></br>
+
         </p>
         <Explanation />
         </div>
@@ -194,7 +194,7 @@ class Explanation extends React.Component{
       this.handleClick = this.handleClick.bind(this)
       this.handleBackClick = this.handleBackClick.bind(this)
   }
-  handleClick(){
+  handleClick(){  
     let newState = ""
     let newExplanation = ""
     let newGif = ""
@@ -292,7 +292,6 @@ class Explanation extends React.Component{
   render(){
     return(
       <div className="anime_container">
-        <img src={this.state.anime_src} className="anime" alt="animation_gif"></img>
         <div className="nav_container">
           <div className="nav_button">
             <Button className="nav_buttons"onClick={this.handleBackClick} variant="light" >
@@ -300,13 +299,14 @@ class Explanation extends React.Component{
             </Button>
           </div>
           <div className="Explanation_box">
-            <p className="Explanation">{this.state.explanation}</p>
+            <p >{this.state.explanation}</p>
           </div>
           <div className="nav_button">
             <Button className="nav_buttons"onClick={this.handleClick} variant="light" >
               <i class="arrow right"></i>
             </Button>
           </div>
+          <img src={this.state.anime_src} className="anime" alt="animation_gif"></img>
         </div>
       </div>
       
