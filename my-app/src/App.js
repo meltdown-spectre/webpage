@@ -9,6 +9,7 @@ import Sidebar from './Sidebar';
 import Cache from './Cache';
 import VM from './VM';
 import OutOfOrder from './OutOfOrder';
+import Mitigations from './Mitigations'
 import Meltdownpic from './resources/meltdown.png';
 import Spectrepic from './resources/spectre.png';
 
@@ -23,6 +24,7 @@ class App extends React.Component{
           <Route exact path="/Cache" component={Cache}></Route>
           <Route exact path="/VM" component={VM}></Route>
           <Route exact path="/OutOfOrder" component={OutOfOrder}></Route>
+          <Route exact path="/Mitigations" component={Mitigations}></Route>
         </Router>
       </Container>
     );
