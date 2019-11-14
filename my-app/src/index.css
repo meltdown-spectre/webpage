@@ -98,6 +98,7 @@ p {
   background: #373a47;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+  width: 100% !important;
 }
 
 .bm-morph-shape {
