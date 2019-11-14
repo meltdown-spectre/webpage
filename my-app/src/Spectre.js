@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 
 const phase0 = "This is a short animation on how the spectre attack works"
-const phase1 = "Brand prediction"
+const phase1 = "Branch prediction"
 const phase2 = "Notice how the out of order execution executes at almost the same time"
 const phase3 = "Notice how the timing for cache retrieval is alot faster than from Main Memory. By timing the retrieval, we can know which array access was from the cache."
 class Spectre extends React.Component {

@@ -51,11 +51,11 @@ class Title extends React.Component{
       <div class ="title-container">
         <header class="Headers"> Visualizing Meltdown and Spectre </header>
         <p>
-          Meltdown and Spectre were attacks that exploited critical vulnerabilities in the way modern processors work.
-          Exploiting something known as
+          Meltdown and Spectre attacks exploit critical vulnerabilities in the way modern processors work.
+          These vulnerabilities allow other programs to steal sensitive information that is currently processed on the computer.
         </p>
         <div class = "SubHeaderHome">
-          The Motivation
+          Motivation
         </div>
         <p class = "purpose">
           Understanding the technical details of Meltdown and Spectre are not trivial. 
