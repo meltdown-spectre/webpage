@@ -11,22 +11,22 @@ class OutOfOrder extends React.Component {
                 <div classname="menu-item">
                     <Sidebar />
                 </div>
-            <div>
+            <div class="text-wrapper">
                 <header className="Headers">Out of Order Execution</header>
                     <p>Out of order execution is a paradigm used in most CPUs nowadays where instructions 
-                    are dynamically scheduled for the processor. They are executed considering the availability
+                    are dynamically scheduled for the processor. They are executed by considering the availability
                     of input data and execution units rather than the original order in the program. Therefore, 
                     the CPU reduces the waste of instruction cycles by waiting for resources or other calculations.
                 <div class="SubHeader">
                     In order execution
                 </div>
-                    Old CPUs worked  with the in order execution where all instructions got executed one by one with
+                    Older CPUs worked with in order execution where all instructions got executed one by one with
                     the following partial steps. <br></br>
                     1. Loading instruction (instruction fetch)<br></br>
-                    2. If the operands are available the instruction is loaded in the respected unit. If the operands
-                    are not available the CPU is going to wait until the operands are available.<br></br>
-                    3. Execute instruction <br></br>
-                    4. The result is written in a register <br></br>
+                    2. If the operands are available, the instruction is loaded in the respected unit.
+                    3. If the operands are not available, the CPU is going to wait until the operands are available.<br></br>
+                    4. Execute instruction <br></br>
+                    5. The result is written in a register <br></br>
                 <div class="SubHeader">
                     Out-of-order execution
                 </div>

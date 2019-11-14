@@ -1,14 +1,12 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import SpectreCode from './resources/spectreCode.png';
-import Spectrepic from './resources/spectre.png';
 import branchP from "./resources/Spectre-slides-BP.gif"
 import caching from "./resources/Spectre-slides-caching.gif"
 import probing from "./resources/Spectre-slides-probing.gif"
 import Button from 'react-bootstrap/Button';
 
 
-const phase0 = "This is a short animation on how the spectre attack works"
+const phase0 = "This is a short animation on how the spectre attack works. Press Right arrow to  continue."
 const phase1 = "Branch prediction"
 const phase2 = "Notice how the out of order execution executes at almost the same time"
 const phase3 = "Notice how the timing for cache retrieval is alot faster than from Main Memory. By timing the retrieval, we can know which array access was from the cache."
@@ -19,9 +17,9 @@ class Spectre extends React.Component {
         <div classname="menu-item">
           <Sidebar />
         </div>
-        <div>
+        <div class="text-wrapper">
           <header className="Headers">Spectre</header>
-          <p>Meltdown exploits privilege escalation, however, Spectre does not. 
+          <p>While Meltdown exploits privilege escalation, Spectre does not. 
             Instead, Spectre requires tailoring to the user process’s software environment. 
             This attack generally affects CPUs that support speculative execution. 
             To recall, Spectre attacks mislead processors to undergo speculative execution 
@@ -110,8 +108,8 @@ class Spectre extends React.Component {
               Walkthrough/Demo
           </div>
           As this attack also relies on the changes in the cache, we will make use of the flush + reload 
-          technique previously used in the Meltdown Walkthrough. In addition, we will also use the same method 
-          of checking the values in the cache (Code 3). In this section, we will be demonstrating a Spectre 
+          technique previously used in the Meltdown Section. In addition, we will also use the same method 
+          of checking the values in the cache. In this section, we will be demonstrating a Spectre 
           variant 1 attack. <br></br>
           Suppose the victim has the following code in their program. <br></br>
           <div class="code">
@@ -121,8 +119,6 @@ class Spectre extends React.Component {
 	              return 0;<br></br>
                 &#125;
           </div>
-          Code XX: The victim’s code vulnerable to the Spectre attack.<br></br>
-          <br></br>
           We will first train the branch predictor to predict that the if-condition will always 
           return true. This can be done by consistently looping a value that is within the size of 
           the array as demonstrated below.<br></br>
@@ -132,14 +128,12 @@ class Spectre extends React.Component {
               victim_code(i); # contains the victim’s code above. Assuming array_size > 20. <br></br>
               &#125;
             </div>
-          Code XX: Part of the attacker’s program that trains the branch predictor. <br></br>
-          <br></br>
           Right after the execution of the code above, we can now input any value larger than the array size. 
           For understanding purposes, we will demonstrate this by using the address of the secret itself. 
           However, in actual scenarios, the address of the sensitive data are not known and this retrieval 
           will be done using any values that is larger than the size of the array. <br></br>
           As the value retrieve is a single variable, we are able to continuously extracted data stored in a 
-          contiguous segment of memory by incrementing the value of x. This is reflected in Code XX below. <br></br>
+          contiguous segment of memory by incrementing the value of x. <br></br>
           <div class = "code">
           for(int j=0; j&#60;len;j++)&#123; <br></br>
 	              for (i=0; i&#60;256; i++) <br></br>
@@ -157,14 +151,6 @@ class Spectre extends React.Component {
               larger_x++; # increment the out of bound value to retrieve the next character <br></br>
             &#125;
           </div>
-          Code XX: Method used to retrieve the values stored in the memory.<br></br>
-          <br></br>
-          The full demonstration code for the Spectre variant 1 attack can be found in Appendix B. <br></br>
-          For our demonstration, the “secret” that we want to retrieve from the victim’s memory is “My password is cs3235project”. 
-          By running the file in Appendix B, we are able to extract the “secret” as seen in Figure XX. <br></br>
-          <br></br>
-          <img class="Picture4" src={SpectreCode} alt="SpectreCode"></img>
-
         </p>
         <Explanation />
         </div>
@@ -180,12 +166,11 @@ class Explanation extends React.Component{
       this.phase1 = phase1;
       this.phase2 = phase2;
       this.phase3 = phase3;
-      this.phase0ani = Spectrepic;
+      this.phase0ani = {};
       this.phase1ani = branchP;
       this.phase2ani = caching;
       this.phase3ani = probing;
       this.state = {
-        anime_src : this.phase0ani,
         exState : 0,
         explanation : this.phase0,
         nextButtonState : "block",
@@ -252,7 +237,7 @@ class Explanation extends React.Component{
         case 0 : 
           newState = 0
           newExplanation = this.phase0
-          newGif = this.phase0ani 
+          newGif = null
           newBackButtonState = "none"
           newNextButtonState = "block"
           break;
@@ -293,7 +278,7 @@ class Explanation extends React.Component{
     return(
       <div className="anime_container">
         <div className="nav_container">
-          <div className="nav_button">
+          <div className="nav_button_left">
             <Button className="nav_buttons"onClick={this.handleBackClick} variant="light" >
               <i class="arrow left"></i>
             </Button>
@@ -306,8 +291,8 @@ class Explanation extends React.Component{
               <i class="arrow right"></i>
             </Button>
           </div>
-          <img src={this.state.anime_src} className="anime" alt="animation_gif"></img>
         </div>
+        <img src={this.state.anime_src} className="SpectreAnime"></img>
       </div>
       
     )

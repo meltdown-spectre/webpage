@@ -1,5 +1,5 @@
 import React from 'react';
-import { elastic as Menu } from 'react-burger-menu';
+import { slide as Menu } from 'react-burger-menu';
 import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
 class Sidebar extends React.Component {
@@ -28,7 +28,6 @@ class Sidebar extends React.Component {
                     <div className="menu-item">
                         <Link to="/Mitigations" className="menu-item">Mitigations</Link>    
                     </div> 
-
                 </Menu>
             </div>
 

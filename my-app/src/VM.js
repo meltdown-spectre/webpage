@@ -12,30 +12,30 @@ class VM extends React.Component {
                 <div classname="menu-item">
                     <Sidebar />
                 </div>
-                <div>
+                <div class="text-wrapper">
                     <header className="Headers">Virtual memory</header>
-                    <p>Virtual Memory (short: VM) is a storage concept that supported in most common computers nowadays.
-                       It describes the actual storage available for a process independent from its adress
-                       space. On the other hand you have the physical memory what describes the actual storage size available
+                    <p>Virtual Memory (VM) is a storage concept that is supported in most common computers nowadays.
+                       It describes the actual storage available for a process independent from its address
+                       space. On the other hand, every computer also have the physical memory which describes the actual storage size available
                        from all resources like RAM, disk and others.
 
                        <div class="SubHeader">
                             Motivation and benefits
                         </div>
-                        The motivation for VM was the abstraction of storage adresses. For the process it doesn't matter
-                        which resource it saves the data in. Further on, it provides a security mechanism as
-                        processes are separated among eachother and no process can access storage of the others.
+                        The motivation for VM was the abstraction of storage adresses. For the process, it does not matter
+                        which resource it saves the data in. In addition, VM also provides a security mechanism as
+                        processes are separated among each other and no process can access storage of the others.
                     </p>
                     <img class="Picture" src={VirtualMemory} alt="VM"></img>
                     <p>
-                        The biggest advantage of VM is increase of memory space. Before VM every process
-                        got an static or dynamic range of storage depending on the system (buddy system, static partition, dynamic
+                        The biggest advantage of VM is the increase of memory space. Before the introduction of VM, every process
+                        has a static or dynamic range of storage depending on the system (buddy system, static partition, dynamic
                         partition etc.).
-                        If the RAM got full there was no more space left for a process to allocate memory and the system crashed.
+                        If the RAM is full, there will be no more space left for a process to allocate memory and the system crashed.
                         VM allows the user to allocate a logical address space (i.e. 32Bit system = 0 - 2<sup>32-1</sup>)
                         where every process has access to. The process doesn't care whether the data is stored in the RAM or disk.
-                        Another advantage of VM is the possibility to initially assign every process an own
-                        unfragmented memory range. Therefore VM avoids fragmentation of the address space by other processes
+                        Another advantage of VM is the possibility to assign every process an own
+                        unfragmented memory range. As a result, VM avoids fragmentation of the address space by other processes.
                         <div class="SubHeader">
                             How does virtual memory work?
                         </div>
@@ -54,10 +54,10 @@ class VM extends React.Component {
                         A page table maps virtual to physical addresses. One Page Table Entry (PTE) maps a range of
                         addresses. Hence, fewer PTE needed to cover the whole address space. Today, typically 4kB pages
                         (1024 pages per page) and sometimes, 2MB per page (524,288 words per pages).
-                        A page fault occures when a virtual address points to the disk storage. The CPU generates a page fault. 
-                        The OS then chooses a page to evict from RAM and write to disk. If the page is dirty, it is written to the 
+                        A page fault occurs when a virtual address points to the disk storage. As such, the CPU generates a page fault. 
+                        The OS then chooses a page to evict from RAM and write to disk. If the page is dirty, it will be written to the 
                         disk first. It then chooses the page in the disk and puts it into RAM. The OS then changes the page table to 
-                        map the new page. It has to be said that paging is very slow what plays a significant role in the attack.
+                        map the new page. It has to be said that paging is very slow and this plays a significant role in the attack.
                         <div class="SubHeader">
                             Kernel memory
                         </div>
@@ -67,16 +67,16 @@ class VM extends React.Component {
                             <img class="Picture3" src={KernelMemory} alt="Kernel Memory"></img>
                         </div>
                         Kernel memory is shown in red. It is contained in physical address range 0–99. Kernel memory is
-                        special memory that only the operating system should be able to access. User programs should not be able 
-                        to access it. <br></br>
-                        User memory is shown in grey. <br></br>
+                        special memory that only the operating system should be able to access and user programs should not be able 
+                        to access it. <br></br><br></br>
+                        User memory is shown in grey. <br></br><br></br>
                         Unallocated physical memory is shown in blue. User memory in each process is in the virtual range 0–99 but
                          backed by different physical memory. Kernel memory in each process is in the virtual range 100–199 but backed by the same physical memory.
                         Even though kernel memory is mapped into each user process, a process running in user mode
                         cannot access the kernel memory. If a process attempts to do so, it will trigger a page fault and the
                         operating system will terminate it.
                         However, when the process is running in kernel mode (for example during a system call), the
-                        rocessor will allow the access.
+                        processor will be allowed to access the kernel memory.
                         <div class="SubHeader">
                             Virtual, logical and physical addresses
                         </div>
@@ -85,7 +85,7 @@ class VM extends React.Component {
                         address (Virtual address). The logical address undergoes translation by the Memory Management Unit (MMU) 
                         or address translation unit. The output of this process is the appropriate physical address or the 
                         location of code/data in RAM. The addresses are bind in 3 different ways – compile time, load time 
-                        or execution time.<br></br>
+                        or execution time.<br></br><br></br>
                         1. Compile time – if it is known where process will reside, physical address will be embedded to 
                         the executable of the program <br></br>
                         2. Load time – If it is not known where the process will reside, relocatable address is 

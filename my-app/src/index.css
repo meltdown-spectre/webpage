@@ -1,35 +1,49 @@
-.Headers{
-  color : orange;
-  font-size: 50px;
-  padding-left: 50px;
-  padding-top: 20px;
-  text-align: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+.Headers {
+    color: orange;
+    font-size: 50px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .SubHeader{
   color: orange;
   font-size: 20px;
   padding-top: 20px;
 }
-.SubHeaderHome{
-  color: orange;
-  font-size: 40px;
-  margin-left: 90px;
-  text-align: left;
+.SubHeaderHome {
+    color: orange;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom:10px;
 }
-.Picture{
-  margin-left:100px;
-  width: 500px;
-  height: 300px;
+.Picture {
+    width: 500px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.Picture2{
-  margin-left:10px;
-  width: 550px;
-  height: 350px;
+.Picture2 {
+    width: 550px;
+    height: 350px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.Picture3{
-  width: 500px;
-  height: 250px;
+.Picture3 {
+    width: 500px;
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .Picture4{
   width: 500px;
@@ -54,6 +68,14 @@
 html,
 body {
   margin: 0;
+  background-color: beige;
+}
+a {
+    color: mediumblue;
+}
+
+.side-bar-link {
+    color: white !important;
 }
 
 #App {
@@ -66,10 +88,13 @@ body {
   overflow: auto;
 }
 p {
-  padding-left: 5%;
   letter-spacing: 1px;
   word-spacing: 5px;
-  font-family: Georgia, 'Times New Roman', Times, serif
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left:40px;
+  margin-right:40px;
+  justify-content:stretch;
+      
 }
 .bm-item {
   display: inline-block;
@@ -87,18 +112,23 @@ p {
   position: fixed;
   width: 36px;
   height: 30px;
-  left: 90px;
-  top: 6px;
+  left: 20px;
+  top: 20px;
 }
 .bm-burger-bars {
   background: #373a47;
 }
 
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-  width: 100% !important;
+    background: #404040;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+    width: 100% !important;
+    overflow-wrap: break-word;
+    overflow: hidden !important;
+}
+.menu-item {
+    color: white !important;
 }
 
 .bm-morph-shape {
@@ -111,7 +141,10 @@ p {
 
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
 
+.bm-cross {
+    background: #bdc3c7;
 }
 
 .meltdown_logo {
@@ -131,22 +164,28 @@ p {
 }
 
 .Meltdown_column{
-  margin-left: 100px;
+  margin-left: 10%;
   float:left;
   height:500px;
   width:35%;
 }
 
-.Spectre_column{
-  margin-right: 200px;
-  float:right;
-  height:500px;
-  width:35%;
+.Spectre_column {
+    margin-right: 10%;
+    float: right;
+    height: 500px;
+    width: 35%;
 }
 
 .title-container{
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.text-wrapper {
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-bottom:50px;
 }
 
 .end-container{
@@ -200,35 +239,51 @@ p {
   float:left;
 }
 
-.anime{
-  width: 600px;
-  height: 400px;
-  position:relative;
-  margin-left:180px;
-  margin-bottom: 100px;
+.anime {
+    width: 1000px;
+    height: 600px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
 }
-.MeltdownAnime{
-  width: 1000px;
-  height: 600px;
-  margin-left:5%;
-  margin-bottom: 100px;
+.SpectreAnime {
+    width: 1000px;
+    height: 600px;
+    margin-bottom: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.MeltdownAnime {
+    width: 1000px;
+    height: 600px;
+    margin-bottom: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .nav-container{
   display:flex;
   align-items: flex-end;
 }
-.nav_button{
+.nav_button_left{
   float:left;
   border-color:red;
 }
-.Explanation_box{
-  background:lightblue;
-  float:left;
-  width:90%;
-  height:100px;
-  justify-content: center;
-  text-align: center;
-  margin-top: 0px;
+.nav_button_right {
+    float: right;
+    border-color: red;
+}
+.Explanation_box {
+    background: lightblue;
+    float: left;
+    width: 90%;
+    height: 80px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
 }
 
 i {
@@ -245,11 +300,12 @@ i {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
-.nav_container{
-  margin-left : 150px;
+.nav_container {
+    margin-left: 100px;
+    height: 50px;
 }
 .nav_buttons{
   width:10px;
-  height:100px;
   margin-bottom: 50px;
+  height: 80px;
 }

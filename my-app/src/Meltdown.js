@@ -1,24 +1,23 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import posed from "react-pose";
 import Meltdownpic from './resources/meltdown.png';
 import caching from "./resources/Meltdown-slides-caching.gif"
 import probing from "./resources/Meltdown-slides-probing.gif"
 import Button from 'react-bootstrap/Button';
 
 
-const phase0 = "This is a short animation on how the meltdown attack works, "
+const phase0 = "This is a short animation on how the meltdown attack works. Press Right arrow to  continue."
 const phase1 = "Notice how the out of order execution executes at almost the same time"
 const phase2 = "Notice how the timing for cache retrieval is alot faster than from Main Memory therefore we know which array access was from the cache."
 
 class Meltdown extends React.Component{
     render(){
       return(
-        <div>
+      <div>
           <div classname="menu-item">
             <Sidebar />
           </div>
-            <div class = "Letters">
+            <div class = "text-wrapper">
                 <header className="Headers">Meltdown</header>
                 <p>Discovered and reported independently by 3 teams in 2018, Meltdown is a 
                   hardware issue found in some processors (Intels, ARMs and IBM POWERs) which 
@@ -155,9 +154,9 @@ class Meltdown extends React.Component{
                   we planted a secret value inside the kernel using procfs. We will then read the planted secret 
                   from a user-level process using the same techniques above. <br></br>
                       </p>
+                      <Explanation />
             </div>
-            <Explanation />
-        </div>
+            </div>
       )
     }
 }
@@ -167,11 +166,10 @@ class Explanation extends React.Component{
       this.phase0 = phase0;
       this.phase1 = phase1;
       this.phase2 = phase2;
-      this.phase0ani = Meltdownpic;
+      this.phase0ani = null;
       this.phase1ani = caching;
       this.phase2ani = probing;
       this.state = {
-        anime_src : this.phase0ani,
         exState : 0,
         explanation : this.phase0,
         nextButtonState : "block",
@@ -202,7 +200,7 @@ class Explanation extends React.Component{
             newNextButtonState = "none"
             newBackButtonState = "block"
             break;   
-        case 2 : 
+        default : 
             newState = 2
             newExplanation = this.phase2
             newGif = this.phase2ani 
@@ -263,9 +261,10 @@ class Explanation extends React.Component{
   }
   render(){
     return(
+    <p>
       <div className="anime_container">
         <div className="nav_container">
-          <div className="nav_button">
+          <div className="nav_button nav_button_left">
             <Button className="nav_buttons"onClick={this.handleBackClick} variant="light" >
               <i class="arrow left"></i>
             </Button>
@@ -279,8 +278,9 @@ class Explanation extends React.Component{
             </Button>
           </div>
         </div>
-        <img src={this.state.anime_src} className="MeltdownAnime" alt="animation_gif"></img>
+        <img src={this.state.anime_src} className="MeltdownAnime"></img>
       </div>
+      </p>
       
     )
   }

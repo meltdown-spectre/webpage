@@ -16,7 +16,7 @@ import Spectrepic from './resources/spectre.png';
 class App extends React.Component{
   render(){
     return (
-      <Container>
+      <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
         <Router>
           <Route exact path="/" component={Main}></Route>
           <Route exact path="/Meltdown" component={Meltdown}></Route>
@@ -36,11 +36,9 @@ class Main extends React.Component{
     const intro = "Introduction for meltdown spectre."
     return (
       <div>
-        <Container>
+        <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
           <Sidebar />
           <Title />
-          <Body />
-          <End />
         </Container>
       </div>
     );
@@ -50,26 +48,24 @@ class Main extends React.Component{
 class Title extends React.Component{
   render(){
     return(
-      <div class ="title-container">
+    <div class="text-wrapper">
         <header class="Headers"> Visualizing Meltdown and Spectre </header>
         <p>
-          Meltdown and Spectre attacks exploit critical vulnerabilities in the way modern processors work.
-          These vulnerabilities allow other programs to steal sensitive information that is currently processed on the computer.
-        </p>
+        <div class = "SubHeaderHome">
+          Overview
+        </div>
+          Attacks exploit critical vulnerabilities in the way modern processors work which allow other programs to steal sensitive information that is currently processed on the computer.
         <div class = "SubHeaderHome">
           Motivation
         </div>
-        <p class = "purpose">
           Understanding the technical details of Meltdown and Spectre are not trivial. 
           The <a href ="https://meltdownattack.com/meltdown.pdf">meltdown</a> and <a href ="https://spectreattack.com/spectre.pdf">spectre</a> papers explore concepts such as micro-operation and micro-architecture that may appear very daunting to the average reader.
-          The team behind this webpage application aims to simplify the technical details of Meltdown and Spectre attack using visualization.
+          The team behind this webpage application aims to simplify the technical details of these two vulnerabilities using visualization.
           Without over complicating the learning process with excessive technical jargon, the team incoporates 
-          and discusses the only most essential components of the attacks. 
-        </p>
+          and discusses only the most essential components of the attacks. 
         <div class = "SubHeaderHome">
           What To Expect
         </div>
-        <p class ="expectation">
           Readers can expect to at least obtain a very basic understanding of how the attacks are conducted.
           Although simplified, readers are expected at least to have basic knowledge of how computers work to able to comprehend the topics discussed.
           Else, readers can start on with simple topics such as:
@@ -78,19 +74,10 @@ class Title extends React.Component{
             <li><a href="https://simple.wikipedia.org/wiki/Instruction_(computer_science)">What are computer instructions?</a></li>
             <li><a href="https://en.wikipedia.org/wiki/Control_flow">What is control flow?</a></li>
           </ol>
-        </p>
-      </div>
-    )
-  }
-}
-
-class Body extends React.Component{
-  render(){
-    return(
-      <div>
-        <div class = "SubHeaderHome">
+          <div class = "SubHeaderHome">
           Just a sneak peak..
         </div>
+        <div class="container">
         <div class = "Meltdown_column">
           <img class="meltdown_logo" src = {Meltdownpic} alt="meltdown_pic" ></img>
           <h1 class = "Meltdown_header">Meltdown</h1>
@@ -109,21 +96,15 @@ class Body extends React.Component{
             <li>Affects Intel, Apple, ARM, AMD</li>
           </ul>
         </div>
-      </div>
-    )
-  }
-}
-class End extends React.Component{
-  render(){
-    return(
-      <div class = "end-container">
+        </div>
+        <div>
         <header class="SubHeaderHome">
           Before you start
         </header>
-        <p>
           Topics like Out of Order Execution, Cache, Virtual memory are essential components of the attack.
           If you are well-read with these topics, you can proceed to <a href="/Meltdown">Meltdown</a> or <a href="/Spectre">Spectre</a> to see how it all comes together.
           If not, it is highly advisable to use the navigation bar on the left to explore these topics before jumping into the attacks.
+        </div>
         </p>
       </div>
     )
