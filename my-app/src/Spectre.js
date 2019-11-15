@@ -58,6 +58,7 @@ class Spectre extends React.Component {
               &nbsp;&nbsp;&nbsp;&nbsp;val = data[array[input]];  #Read data<br></br>
             &#125;
           </div>
+          <p>Code 1: Vulnerable Code.<br></br></p><br></br>
           <p>Using the example given above, the attack can be split into 2 phases: Mistraining phase and 
           Exploiting phase. In the mistraining phase, the attacker will constantly pass a value within 
           the bounds as the input. This will train the branch predictor to expect the “if” result to be true. 
@@ -78,7 +79,7 @@ class Spectre extends React.Component {
           Instead of training the branch prediction like in variant 1, the attacker trains the Branch Target 
           Buffer (BTB) into mispredicting a branch from an indirect branch instruction to the address of the 
           gadget. This will result in the gadget being speculatively executed and the consequences would be 
-          similar to that of variant 1. <br></br>
+          similar to that of variant 1. <br></br><br></br>
           To carry out this variant of Spectre attack, the attacker finds the gadget’s virtual address in the 
           user virtual memory and trains the BTB to indirect branch to that address. To train the BTB, the 
           attacker uses his own virtual address space. What actually resides in the attacker’s address space 
@@ -119,6 +120,7 @@ class Spectre extends React.Component {
 	              &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br></br>
                 &#125;
           </div>
+          <p>Code 2: Victim's Code.<br></br></p><br></br>
           <p>We will first train the branch predictor to predict that the if-condition will always 
           return true. This can be done by consistently looping a value that is within the size of 
           the array as demonstrated below.<br></br></p>
@@ -128,10 +130,11 @@ class Spectre extends React.Component {
               &nbsp;&nbsp;&nbsp;&nbsp;victim_code(i); # contains the victim’s code above. Assuming array_size > 20. <br></br>
               &#125;
             </div>
+            <p>Code 3: Attacker's Code to train branch predictor.<br></br></p><br></br>
           <p>Right after the execution of the code above, we can now input any value larger than the array size. 
           For understanding purposes, we will demonstrate this by using the address of the secret itself. 
           However, in actual scenarios, the address of the sensitive data are not known and this retrieval 
-          will be done using any values that is larger than the size of the array. <br></br>
+          will be done using any values that is larger than the size of the array. <br></br><br></br>
           As the value retrieve is a single variable, we are able to continuously extracted data stored in a 
           contiguous segment of memory by incrementing the value of x. <br></br></p>
           <div className = "code">
@@ -151,6 +154,7 @@ class Spectre extends React.Component {
               &nbsp;&nbsp;&nbsp;&nbsp;larger_x++; # increment the out of bound value to retrieve the next character <br></br>
             &#125;
           </div>
+          <p>Code 4: Retrieving the secret Code.<br></br></p><br></br>
         <Explanation />
         </div>
       </div>

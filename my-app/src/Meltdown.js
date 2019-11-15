@@ -47,7 +47,7 @@ class Meltdown extends React.Component{
                   ahead of the current instruction. As such, this brings about a side channel vulnerability if the instructions 
                   executed relies on a secret value. As mentioned previously, kernel memory is not accessible by user processes 
                   and an unprivileged access to it by the process will cause an exception to be thrown. This exception thrown 
-                  could be dealt with using exception handling or suppression. <br></br>
+                  could be dealt with using exception handling or suppression. <br></br><br></br>
                   A malicious attacker can handle the exception by installing a signal handler to catch a specific exception 
                   and runs his code to prevent the process from terminating.<br></br>
                   <br></br>
@@ -68,7 +68,7 @@ class Meltdown extends React.Component{
                   <p>The flush+reload technique allows users to detect if a memory location has been accessed within a period of time. 
                   The general idea behind this technique is to observe the differences in the time taken for retrieval of data when a 
                   memory location is accessed the first time and its subsequent accesses. Using this technique, we can observe that 
-                  memory access time is slow initially but becomes much faster in the subsequent access of the same memory location. 
+                  memory access time is slow initially but becomes much faster in the subsequent access of the same memory location. <br></br><br></br> 
                   This difference in timings between the first access and subsequent accesses is due to the caching of the data. 
                   As the first memory access resulted in a cache miss, the process would have to read the data from the physical 
                   memory which causes the process to incur additional overhead cost. After retrieving the data from the physical memory, 
@@ -81,6 +81,7 @@ class Meltdown extends React.Component{
                   <div className = "code">
                     _mm_clflush(Address[A])
                   </div>
+                  <p>Code 1: Memory Flush Code.<br></br></p><br></br>
                   <p>3. Next, we will run the process C. <br></br>
                   4. After C completes its execution, we will access A separately and measure how long it takes to retrieve its value. <br></br>
                   5. This can be done by counting the number of clock cycles it takes to access the memory. We are able to measure the access 
@@ -90,6 +91,7 @@ class Meltdown extends React.Component{
                     A    = *addr; // addr: Address of A <br></br>
                     time2 = __rdtscp(&A) - time1;
                   </div>
+                  <p>Code 2: Read Time-stamp counter Code.<br></br></p><br></br>
                   <p>6. A short access time would mean that C had used A during its execution. <br></br>
                   7. On the other hand, a long access time would mean that A is not in the cache. 
                   However, we cannot be certain that C did not use A during its execution as it 
@@ -113,20 +115,20 @@ class Meltdown extends React.Component{
                     &nbsp;&nbsp;&nbsp;&nbsp;array[kernel_data*4096+DELTA] += 1; // Line 2. Speculatively executed <br></br>
                     &#125;
                   </div>
-                  <p>Code 2: Meltdown code <br></br></p>
+                  <p>Code 3: Meltdown code <br></br></p>
                   <br></br>
                   <p>When the CPU executes line 1, it fetches the data as well as check the access rights of the process 
                   in parallel. If the data returns before the access rights check is complete, the CPU would have all 
                   it needs to execute line 2. Therefore, instead of idling, the processor will speculatively execute 
-                  line 2. As such, line 2 will access a memory location based on the data that was read in line 1.<br></br>
+                  line 2. As such, line 2 will access a memory location based on the data that was read in line 1.<br></br><br></br>
                   Once the access right check returns, the CPU realizes that this is an illegal memory access and discards 
                   the effects of line 1. This is done by setting a status bit in the reorder buffer to indicate a fault, and 
-                  when the load data operation commits, the pipeline is flushed and an exception is thrown.<br></br>
+                  when the load data operation commits, the pipeline is flushed and an exception is thrown.<br></br><br></br>
                   However, although the pipeline is flushed, the cache had already been affected. The kernel_data is of 
                   type char and has 256 values. Hence, one of the 256 possible cache lines would have already been accessed. 
                   This effect can be observed by the flush+reload technique and hence, we are able to determine the value 
-                  of kernel_data by determining which cache line has been accessed. <br></br>
-                  Code 2 shows how we are able to determine the value of kernel_data. We first check each of the 256 cache 
+                  of kernel_data by determining which cache line has been accessed. <br></br><br></br>
+                  Code 4 shows how we are able to determine the value of kernel_data. We first check each of the 256 cache 
                   lines and we are able to deduce that the cache line that has a short access time was accessed. 
                   The accessed cache line was chosen based on the value of kernel_data. Hence, we will be able to determine 
                   what that value was.
@@ -149,7 +151,7 @@ class Meltdown extends React.Component{
                 &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br>
                 &#125;
                   </div>
-                  <br></br>
+                  <p>Code 4: Reload Side Channel Code<br></br></p>
                   <br></br>
                   <p>We combine these two parts to get the meltdown attack. In order to demonstrate this attack, 
                   we planted a secret value inside the kernel using procfs. We will then read the planted secret 
