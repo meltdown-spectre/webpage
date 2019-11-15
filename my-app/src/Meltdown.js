@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import caching from "./resources/Meltdown-slides-caching.gif"
 import probing from "./resources/Meltdown-slides-probing.gif"
 import Button from 'react-bootstrap/Button';
+import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
 
 const phase0 = "This is a short animation on how the meltdown attack works. Press Right arrow to  continue."
@@ -74,7 +75,8 @@ class Meltdown extends React.Component{
                   memory which causes the process to incur additional overhead cost. After retrieving the data from the physical memory, 
                   the data is then stored in the cache for subsequent access. As a result, subsequent access to that same memory 
                   location resulted in a cache hit and the time to retrieve the data from the memory is greatly reduced.
-                  Using the reasoning above, we will be able to detect if a process uses a memory address. Below describes the detection process:<br></br>
+                  Using the reasoning above, we will be able to detect if a process uses a memory address. <br></br><br></br> 
+                  Below describes the detection process:<br></br>
                   1. Suppose we would like to detect if process C accesses/uses the memory location A. <br></br>
                   2. First, we will initialise the cache by flushing A from the cache. We are able to flush the cache using the clflush instruction.
                   </p>
@@ -152,11 +154,46 @@ class Meltdown extends React.Component{
                 &#125;
                   </div>
                   <p>Code 4: Reload Side Channel Code<br></br></p>
-                  <br></br>
-                  <p>We combine these two parts to get the meltdown attack. In order to demonstrate this attack, 
-                  we planted a secret value inside the kernel using procfs. We will then read the planted secret 
-                  from a user-level process using the same techniques above. <br></br>
+                  <div className="SubHeader">
+                    <p>Meltdown Attack Guide</p>
+                  </div>
+                  <p>We combined these two parts to get the meltdown attack. You will now get a chance to carry out this attack on your own.
+                  Before we begin, download the 5 files     <Link to="/Meltdown-files.rar" target="_blank" download>here</Link> and place them into the same directory.<br></br><br></br>
+                    <b>Step 1.</b> We first demonstrate a method to measure cache timings. This is straightforward with the use of the clflush 
+                    and rdtscp instructions. Open the cacheHitMiss.c file. <br></br><br></br>
+                    Compile the program with the "-march=native" flag and run the program a few times. Note that the cache hit generally
+                    takes less than 100 cycles, and cache miss generally takes more than 250 cycles. Hence, you can set the cache hit/miss
+                    threshold as any value between 100 to 250. In the example file given, the threshold is set to 200 cycles.<br></br><br></br>
+                    <b>Step 2.</b> Next, we use the flush+reload technique to detect memory accesses. In this step, we will flush the cache,
+                    access a memory address, and reload the cache, in an attempt to detect which memory address was accessed. Note that
+                    this is not 100% successful, however, we can improve the success rate by repeated trials.
+                    <br></br><br></br>
+                    Open the flushReload.c file. First, try out both version 1. After testing version 1, you can try version 2. You will observe that version 2 has a much
+                    better accuracy.<br></br><br></br>
+                    <b>Step 3.</b> We will now install some data in the kernel. To do this, we make use of kernel modules. Run the makefile provided,
+                    which will compile meltdownKernel.c to a kernel module. Next, install the module and use grep to obtain the address
+                    of the secret data. Below shows the command needed to obtain the address. <br></br><br></br>
                       </p>
+                      <div className="code">
+                    $ make<br></br>
+                    $ sudo insmod meltdownKernel.ko<br></br>
+                    $ dmesg | grep "secret data address"
+                  </div>
+                  <p>Code 5: Installing the kernel module<br></br></p>
+                  <br></br>
+                  <p>
+                  <b>Step 4.</b> We now are ready to run meltdown. The key idea in meltdown is to speculatively read the secret data, 
+                  and use the secret data as an index into an array. The index can be recovered using the flush+reload technique, 
+                  and hence leak the secret data. Remember to adjust the value of ADDR in the meltdown.c file to the address found in the previous step.
+                  <br></br><br></br>
+                  We still need some slight details to successfully pull this attack off.<br></br>
+1. <b>Exception handling.</b> Our illegal memory access will throw an exception, which if unhandled, will cause our process to be terminated. We have to install an exception handler to catch the exception thrown by our illegal memory access, and allow meltdown to continue running. <br></br>
+2. <b>Winning the race condition.</b> In order for the attack to work, the secret data must be fetched before the privilege check completes. We increase the chance of this happening by loading the secret data into the L1 cache, as well as introducing useless computation to keep the logic units busy.<br></br><br></br>
+You can now compile and run the meltdown.c file to see the secret from the kernel memory. <br></br><br></br>
+If you manage to see the values of the secret, CONGRATULATIONS!! You have successfully performed a Meltdown attack on the kernel memory. <br></br>
+If you did not manage to see the values of the secret, repeat the steps above and try again. The secret will be yours soon! <br></br><br></br>
+We have included an animation of the Meltdown vulnerabilities and how it works below. Do take a look at it to understand more about this vulnerability. <br></br><br></br>
+                  </p>
                       <Explanation />
             </div>
             </div>
