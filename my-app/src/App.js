@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Meltdown from "./Meltdown"
 import Spectre from "./Spectre"
 import Sidebar from './Sidebar';
@@ -33,7 +32,6 @@ class App extends React.Component{
 
 class Main extends React.Component{
   render(){
-    const intro = "Introduction for meltdown spectre."
     return (
       <div>
         <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
@@ -48,64 +46,70 @@ class Main extends React.Component{
 class Title extends React.Component{
   render(){
     return(
-    <div class="text-wrapper">
-        <header class="Headers"> Visualizing Meltdown and Spectre </header>
-        <p>
-        <div class = "SubHeaderHome">
-          Overview
+    <div className="text-wrapper">
+        <header className="Headers"> Visualizing Meltdown and Spectre </header>
+        <div className = "SubHeaderHome">
+          <p>Overview</p>
         </div>
-          Attacks exploit critical vulnerabilities in the way modern processors work which allow other programs to steal sensitive information that is currently processed on the computer.
-        <div class = "SubHeaderHome">
-          Motivation
+          <p>Attacks exploit critical vulnerabilities in the way modern processors work which allow other programs to steal sensitive information that is currently processed on the computer.</p>
+        <div className = "SubHeaderHome">
+          <p>Motivation</p>
         </div>
-          Understanding the technical details of Meltdown and Spectre are not trivial. 
+          <p>Understanding the technical details of Meltdown and Spectre are not trivial. 
           The <a href ="https://meltdownattack.com/meltdown.pdf">meltdown</a> and <a href ="https://spectreattack.com/spectre.pdf">spectre</a> papers explore concepts such as micro-operation and micro-architecture that may appear very daunting to the average reader.
           The team behind this webpage application aims to simplify the technical details of these two vulnerabilities using visualization.
           Without over complicating the learning process with excessive technical jargon, the team incoporates 
-          and discusses only the most essential components of the attacks. 
-        <div class = "SubHeaderHome">
-          What To Expect
+          and discusses only the most essential components of the attacks.
+          </p>
+        <div className = "SubHeaderHome">
+          <p>What To Expect</p>
         </div>
+        <p>
           Readers can expect to at least obtain a very basic understanding of how the attacks are conducted.
           Although simplified, readers are expected at least to have basic knowledge of how computers work to able to comprehend the topics discussed.
-          Else, readers can start on with simple topics such as:
-          <ol class = "to_start">
+          Else, readers can start on with simple topics such as:</p>
+          <ol className = "to_start">
+          <p>
             <li><a href="https://en.wikipedia.org/wiki/Computer_memory">What is computer memory?</a></li>
             <li><a href="https://simple.wikipedia.org/wiki/Instruction_(computer_science)">What are computer instructions?</a></li>
             <li><a href="https://en.wikipedia.org/wiki/Control_flow">What is control flow?</a></li>
+          </p>
           </ol>
-          <div class = "SubHeaderHome">
-          Just a sneak peak..
+          <div className = "SubHeaderHome">
+          <p>Just a sneak peak..</p>
         </div>
-        <div class="container">
-        <div class = "Meltdown_column">
-          <img class="meltdown_logo" src = {Meltdownpic} alt="meltdown_pic" ></img>
-          <h1 class = "Meltdown_header">Meltdown</h1>
-          <ul class = "meltdown_summary">
-            <li>Melts the isolation between users application and operating system</li>
+        <div className="container">
+        <div className = "Meltdown_column">
+          <img className="meltdown_logo" src = {Meltdownpic} alt="meltdown_pic" ></img>
+          <h1 className = "Meltdown_header">Meltdown</h1>
+          <ul className = "meltdown_summary">
+            <p><li>Melts the isolation between users application and operating system</li>
             <li>Uses intel priviledge execution to perform speculative execution</li>
             <li>Affects Intel, Apple</li>
+            </p>
           </ul>
         </div>
-        <div class = "Spectre_column">
-          <img class ="spectre_logo" src = {Spectrepic} alt="spectre_pic"></img>
-          <h1 class = "Spectre_header">Spectre</h1>
-          <ul class = "spectre_summary">
+        <div className = "Spectre_column">
+          <p><img className ="spectre_logo" src = {Spectrepic} alt="spectre_pic"></img></p>
+          <h1 className = "Spectre_header">Spectre</h1>
+          <ul className = "spectre_summary">
+          <p>
             <li>Breaks the isolation between different applications</li>
             <li>Uses Branch prediction to perform speculative execution</li>
             <li>Affects Intel, Apple, ARM, AMD</li>
+            </p>
           </ul>
         </div>
         </div>
         <div>
-        <header class="SubHeaderHome">
-          Before you start
+        <header className="SubHeaderHome">
+          <p>Before you start</p>
         </header>
-          Topics like Out of Order Execution, Cache, Virtual memory are essential components of the attack.
+          <p>Topics like Out of Order Execution, Cache, Virtual memory are essential components of the attack.
           If you are well-read with these topics, you can proceed to <a href="/Meltdown">Meltdown</a> or <a href="/Spectre">Spectre</a> to see how it all comes together.
           If not, it is highly advisable to use the navigation bar on the left to explore these topics before jumping into the attacks.
-        </div>
         </p>
+        </div>
       </div>
     )
   }

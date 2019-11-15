@@ -4,8 +4,8 @@
     "\\my-app",
     "\\my-app\\public",
     "\\my-app\\src",
-    "\\my-app\\src\\resources"
+    "\\my-app\\src\\components"
   ],
-  "SelectedNode": "\\my-app\\src\\resources\\Meltdown-slides-caching.gif",
+  "SelectedNode": "\\my-app\\src\\VM.js",
   "PreviewInSolutionExplorer": false
 }
