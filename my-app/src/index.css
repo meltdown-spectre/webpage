@@ -50,15 +50,18 @@
   height: 500px;
   margin-left: 200px;
 }
-.code{
-  font-size: 20px;
-  border: black;
-  border-width: 1px;
-  border-style: solid;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 15px;
+.code {
+    font-size: 20px;
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    padding:10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
 }
 .button{
   font-size: 35px;
@@ -163,17 +166,17 @@ p {
 
 }
 
-.Meltdown_column{
-  margin-left: 10%;
-  float:left;
-  height:500px;
-  width:35%;
+.Meltdown_column {
+    margin-left: 10%;
+    float: left;
+    height: 600px;
+    width: 35%;
 }
 
 .Spectre_column {
     margin-right: 10%;
     float: right;
-    height: 500px;
+    height: 600px;
     width: 35%;
 }
 
@@ -308,4 +311,9 @@ i {
   width:10px;
   margin-bottom: 50px;
   height: 80px;
+}
+
+.columns {
+    width: fit-content;
+    height: fit-content;
 }

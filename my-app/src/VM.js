@@ -1,6 +1,4 @@
 import React from 'react';
-import { elastic as Menu } from 'react-burger-menu';
-import { BrowserRouter as Switch, Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import VirtualMemory from './resources/VM.png';
 import KernelMemory from './resources/Kernel_Vm.png';
@@ -9,24 +7,24 @@ class VM extends React.Component {
     render() {
         return (
             <div>
-                <div classname="menu-item">
+                <div className="menu-item">
                     <Sidebar />
                 </div>
-                <div class="text-wrapper">
+                <div className="text-wrapper">
                     <header className="Headers">Virtual memory</header>
                     <p>Virtual Memory (VM) is a storage concept that is supported in most common computers nowadays.
                        It describes the actual storage available for a process independent from its address
                        space. On the other hand, every computer also have the physical memory which describes the actual storage size available
                        from all resources like RAM, disk and others.
-
-                       <div class="SubHeader">
-                            Motivation and benefits
+                       </p>
+                       <div className="SubHeader">
+                            <p>Motivation and benefits</p>
                         </div>
-                        The motivation for VM was the abstraction of storage adresses. For the process, it does not matter
+                        <p> motivation for VM was the abstraction of storage adresses. For the process, it does not matter
                         which resource it saves the data in. In addition, VM also provides a security mechanism as
                         processes are separated among each other and no process can access storage of the others.
                     </p>
-                    <img class="Picture" src={VirtualMemory} alt="VM"></img>
+                    <img className="Picture" src={VirtualMemory} alt="VM"></img>
                     <p>
                         The biggest advantage of VM is the increase of memory space. Before the introduction of VM, every process
                         has a static or dynamic range of storage depending on the system (buddy system, static partition, dynamic
@@ -36,19 +34,20 @@ class VM extends React.Component {
                         where every process has access to. The process doesn't care whether the data is stored in the RAM or disk.
                         Another advantage of VM is the possibility to assign every process an own
                         unfragmented memory range. As a result, VM avoids fragmentation of the address space by other processes.
-                        <div class="SubHeader">
-                            How does virtual memory work?
+                        </p>
+                        <div className="SubHeader">
+                            <p>How does virtual memory work?</p>
                         </div>
-                        Virtual Memory are handled by paging and segmentation. A program accesses memory in these following steps: <br></br>
+                        <p>Virtual Memory are handled by paging and segmentation. A program accesses memory in these following steps: <br></br>
                         1. The  program executes a load with a virtual address.  <br></br>
                         2. The computer translate the address to the physical address in memory.  <br></br>
                         3. If the physical address is not in memory, the OS loads it in from disk.  <br></br>
                         4. The computer then reads the RAM using the physical address and returns the data to the program  <br></br>
-                        
-                        <div class="SubHeader">
-                            Pages
+                        </p>
+                        <div className="SubHeader">
+                            <p>Pages</p>
                         </div>
-                        Pages are blocks of consistent size. They serve as a transport medium between virtual and physical memory.
+                        <p>Pages are blocks of consistent size. They serve as a transport medium between virtual and physical memory.
                         The physical memory is separated in frames which have the same size of pages to make it easier to load 
                         pages in it.
                         A page table maps virtual to physical addresses. One Page Table Entry (PTE) maps a range of
@@ -58,15 +57,16 @@ class VM extends React.Component {
                         The OS then chooses a page to evict from RAM and write to disk. If the page is dirty, it will be written to the 
                         disk first. It then chooses the page in the disk and puts it into RAM. The OS then changes the page table to 
                         map the new page. It has to be said that paging is very slow and this plays a significant role in the attack.
-                        <div class="SubHeader">
-                            Kernel memory
+                        </p>
+                        <div className="SubHeader">
+                            <p>Kernel memory</p>
                         </div>
-                        The following figure describes how kernel memory is saved in the physical memory and how VM is mapped into 
-                        it.
+                        <p>The following figure describes how kernel memory is saved in the physical memory and how VM is mapped into 
+                        it.</p>
                         <div>
-                            <img class="Picture3" src={KernelMemory} alt="Kernel Memory"></img>
+                            <p><img className="Picture3" src={KernelMemory} alt="Kernel Memory"></img></p>
                         </div>
-                        Kernel memory is shown in red. It is contained in physical address range 0–99. Kernel memory is
+                        <p>Kernel memory is shown in red. It is contained in physical address range 0–99. Kernel memory is
                         special memory that only the operating system should be able to access and user programs should not be able 
                         to access it. <br></br><br></br>
                         User memory is shown in grey. <br></br><br></br>
@@ -76,11 +76,11 @@ class VM extends React.Component {
                         cannot access the kernel memory. If a process attempts to do so, it will trigger a page fault and the
                         operating system will terminate it.
                         However, when the process is running in kernel mode (for example during a system call), the
-                        processor will be allowed to access the kernel memory.
-                        <div class="SubHeader">
-                            Virtual, logical and physical addresses
+                        processor will be allowed to access the kernel memory.</p>
+                        <div className="SubHeader">
+                            <p>Virtual, logical and physical addresses</p>
                         </div>
-                        Logical address is address generated by CPU during execution whereas Physical Address refers to
+                        <p>Logical address is address generated by CPU during execution whereas Physical Address refers to
                         location in memory unit (the one that is loaded into memory). The user deals with only logical 
                         address (Virtual address). The logical address undergoes translation by the Memory Management Unit (MMU) 
                         or address translation unit. The output of this process is the appropriate physical address or the 

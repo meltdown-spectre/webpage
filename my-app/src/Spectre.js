@@ -13,52 +13,52 @@ const phase3 = "Notice how the timing for cache retrieval is alot faster than fr
 class Spectre extends React.Component {
   render() {
     return (
-      <div>
-        <div classname="menu-item">
+      <div className="">
+        <div className="menu-item">
           <Sidebar />
         </div>
-        <div class="text-wrapper">
+        <div className="text-wrapper">
           <header className="Headers">Spectre</header>
           <p>While Meltdown exploits privilege escalation, Spectre does not. 
             Instead, Spectre requires tailoring to the user process’s software environment. 
             This attack generally affects CPUs that support speculative execution. 
-            To recall, Spectre attacks mislead processors to undergo speculative execution 
-            that should not have been executed under normal circumstances.
-            This section will provide a more in-depth look into the Spectre attacks.
-          <div class="SubHeader">
-           Description
+            Spectre attacks mislead processors to undergo speculative execution 
+            that should not have been executed under normal circumstances. Now, let us take a 
+            closer look at it below.</p>
+          <div className="SubHeader">
+           <p>Description</p>
           </div>
-          Unauthorised copying, transferring and retrieving of data from a computer or a 
+          <p>Unauthorised copying, transferring and retrieving of data from a computer or a 
           server is known as data exfiltration. Spectre attacks combines both speculative 
           execution and data exfiltration to violate memory isolation. In general, the 
           attack starts with the insertion of a malicious instructions within the process address 
-          space. These instructions, when executed, leaks the contents of the user’s memory or 
-          registers through a covert channel. The subsequent step would involve the attacker tricking 
+          space. These instructions, when executed, leaks the contents of the user’s memory/registers 
+          through a covert channel. The subsequent step would involve the attacker tricking 
           the CPU into speculatively execute the malicious instructions. Once the sequence of instructions 
           is executed, the attacker will deduce the sensitive data that was received in the covert channel.<br></br>
-          
+          <br></br>
           Although this speculative execution will be reverted back eventually, the effect of this execution 
           is similar to that of Meltdown. There will be microarchitectural changes made to components such 
-          as the cache and the leaked data can then be retrieved using the Flush + Reload method mentioned in the "Meltdown" section. <br></br>
-
-          The above describes how Spectre attacks work in general. Now, we will go deeper into the more 
+          as the cache and the leaked data can then be retrieved using the Flush + Reload method mentioned in the <a href="/Meltdown">Meltdown</a>. <br></br>
+          <br></br>
+          Now that we have described how Spectre attacks work in general, let us go deeper into the more 
           common variants of Spectre: Variant 1, Variant 2 and Variant 4. <br></br>
-
-          <div class="SubHeader">
-            Spectre Variant 1 - Bounds Check Bypass
+          </p>
+          <div className="SubHeader">
+            <p>Spectre Variant 1 - Bounds Check Bypass</p>
           </div>
-          This vulnerability allows attackers to use the speculative execution of conditional branch instructions to 
+          <p>This vulnerability allows attackers to use the speculative execution of conditional branch instructions to 
           leak information that are usually not accessible to them. Attackers take advantage of the “confused deputy” 
           code that is used for bounds checking, like checking if the index is inbound for an array. Speculative 
           execution of the memory access to out of bounds memory can leak information to the attackers. <br></br>
           <br></br>
-          This variant involves the attacker mistraining the branch predictor into mispredicting the branch.
-           <div class="code">
+          This variant involves the attacker mistraining the branch predictor into mispredicting the branch.</p>
+           <div className="code">
             if (input &#60; array_size) &#123;   #Checks if input in not out of bounds <br></br>
-              val = data[array[input]];  #Read data<br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;val = data[array[input]];  #Read data<br></br>
             &#125;
           </div>
-          Using the example given above, the attack can be split into 2 phases: Mistraining phase and 
+          <p>Using the example given above, the attack can be split into 2 phases: Mistraining phase and 
           Exploiting phase. In the mistraining phase, the attacker will constantly pass a value within 
           the bounds as the input. This will train the branch predictor to expect the “if” result to be true. 
           Subsequently, in the exploit phase, the attacker will input a value that is out of bounds. 
@@ -67,11 +67,11 @@ class Spectre extends React.Component {
           value read will be stored and remain in the cache even after the condition results in false and the 
           execution is reverted. <br></br>
           <br></br>
-          The attacker will then be able to determine the leaked memory using the flush + reload technique.
-          <div class="SubHeader">
-              Spectre Variant 2 - Branch Target Injection
+          The attacker will then be able to determine the leaked memory using the flush + reload technique.</p>
+          <div className="SubHeader">
+              <p>Spectre Variant 2 - Branch Target Injection</p>
           </div>
-          This vulnerability exploits the indirect branch predictors to direct instructions that are 
+          <p>This vulnerability exploits the indirect branch predictors to direct instructions that are 
           speculatively executed after an indirect branch instruction to the gadget. A gadget is a sequence 
           of carefully chosen instructions that are in the processors’ memory. Attackers can train the indirect 
           branch predictors to speculatively execute malicious code to leak information to them. 
@@ -84,11 +84,11 @@ class Spectre extends React.Component {
           attacker uses his own virtual address space. What actually resides in the attacker’s address space 
           does not matter as long as the virtual address is similar to that of the user’s address. Once the BTB 
           is mistrained to direct indirect branch to that virtual address, the attacker will be able to get a 
-          hold of the user’s leaked data.
-          <div class="SubHeader">
-              Spectre Variant 4 - Speculative Store Bypass
+          hold of the user’s leaked data.</p>
+          <div className="SubHeader">
+              <p>Spectre Variant 4 - Speculative Store Bypass</p>
           </div>
-          This vulnerability uses the memory dependence prediction feature of modern processors which can 
+          <p>This vulnerability uses the memory dependence prediction feature of modern processors which can 
           predict the memory address of load and store instructions before their addresses are known. The 
           memory dependence prediction feature allows load and store instructions to speculatively execute 
           before their addresses are known. Attackers can create “confused deputy” code to speculatively execute 
@@ -103,55 +103,54 @@ class Spectre extends React.Component {
           loading of the data will be speculatively executed. The data that is loaded will be stored in the 
           cache. Once the processor realise that it is storing and loading from the same address, the previous 
           value loaded will be reverted and the new value is loaded. However, there were already changes made to 
-          the cache and the leaked data could be retrieved in a similar way as mentioned above. 
-          <div class="SubHeader">
-              Walkthrough/Demo
+          the cache and the leaked data could be retrieved in a similar way as mentioned above. </p>
+          <div className="SubHeader">
+              <p>Walkthrough/Demo</p>
           </div>
-          As this attack also relies on the changes in the cache, we will make use of the flush + reload 
+          <p>As this attack also relies on the changes in the cache, we will make use of the flush + reload 
           technique previously used in the Meltdown Section. In addition, we will also use the same method 
           of checking the values in the cache. In this section, we will be demonstrating a Spectre 
           variant 1 attack. <br></br>
-          Suppose the victim has the following code in their program. <br></br>
-          <div class="code">
+          Suppose the victim has the following code in their program. <br></br></p>
+          <div className="code">
               if (x &#60; array_size) &#123; <br></br>
-	            return array[x];<br></br>
+	            &nbsp;&nbsp;&nbsp;&nbsp;return array[x];<br></br>
               &#125;else&#123;<br></br>
-	              return 0;<br></br>
+	              &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br></br>
                 &#125;
           </div>
-          We will first train the branch predictor to predict that the if-condition will always 
+          <p>We will first train the branch predictor to predict that the if-condition will always 
           return true. This can be done by consistently looping a value that is within the size of 
-          the array as demonstrated below.<br></br>
-            <div class="code"> 
+          the array as demonstrated below.<br></br></p>
+            <div className="code"> 
             for (i = 0; i &#60; 20; i++) &#123; <br></br>
-              _mm_clflush(& array_size); #flush the values stored in the cache <br></br>
-              victim_code(i); # contains the victim’s code above. Assuming array_size > 20. <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;_mm_clflush(& array_size); #flush the values stored in the cache <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;victim_code(i); # contains the victim’s code above. Assuming array_size > 20. <br></br>
               &#125;
             </div>
-          Right after the execution of the code above, we can now input any value larger than the array size. 
+          <p>Right after the execution of the code above, we can now input any value larger than the array size. 
           For understanding purposes, we will demonstrate this by using the address of the secret itself. 
           However, in actual scenarios, the address of the sensitive data are not known and this retrieval 
           will be done using any values that is larger than the size of the array. <br></br>
           As the value retrieve is a single variable, we are able to continuously extracted data stored in a 
-          contiguous segment of memory by incrementing the value of x. <br></br>
-          <div class = "code">
+          contiguous segment of memory by incrementing the value of x. <br></br></p>
+          <div className = "code">
           for(int j=0; j&#60;len;j++)&#123; <br></br>
-	              for (i=0; i&#60;256; i++) <br></br>
-                     hits[i] = 0; #number of times the character is found in the cache <br></br>
-	          for (i = 0; i&#60;1000; i++) &#123; <br></br>
-                 spectre_attack(larger_x); # trains the branch predictor and perform attack <br></br>         
-                 reloadSideChannelImproved(); # same method as Meltdown <br></br>
-              &#125; <br></br>
-              int max = 0; <br></br>
-              for (i = 0; i &#60;256; i++)&#123; <br></br>
-		             if(hits[max] &#60;hits[i]) max = i; #find the value with highest number of cache hits <br></br>
-              &#125;
-              printf("Reading secret value at %p = ", (void*)larger_x); <br></br>
-              printf("The secret value is %c\n", max); <br></br>
-              larger_x++; # increment the out of bound value to retrieve the next character <br></br>
+	              &nbsp;&nbsp;&nbsp;&nbsp;for (i=0; i&#60;256; i++) <br></br>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hits[i] = 0; #number of times the character is found in the cache <br></br><br></br>
+	          &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i&#60;1000; i++) &#123; <br></br>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spectre_attack(larger_x); # trains the branch predictor and perform attack <br></br>         
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reloadSideChannelImproved(); # same method as Meltdown <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&#125; <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;int max = 0; <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i &#60;256; i++)&#123; <br></br>
+		             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(hits[max] &#60;hits[i]) max = i; #find the value with highest number of cache hits <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br><br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;printf("Reading secret value at %p = ", (void*)larger_x); <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;printf("The secret value is %c\n", max); <br></br><br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;larger_x++; # increment the out of bound value to retrieve the next character <br></br>
             &#125;
           </div>
-        </p>
         <Explanation />
         </div>
       </div>
@@ -208,7 +207,7 @@ class Explanation extends React.Component{
             newNextButtonState = "none"
             newBackButtonState = "block"
             break;  
-        case 3 : 
+        default : 
             newState = 3
             newExplanation = this.phase3
             newGif = this.phase3ani 
@@ -255,7 +254,7 @@ class Explanation extends React.Component{
           newBackButtonState = "block"
           newNextButtonState = "block"
           break;     
-        case 3 : 
+        default : 
           newState = 2
           newExplanation = this.phase2
           newGif = this.phase2ani
@@ -280,7 +279,7 @@ class Explanation extends React.Component{
         <div className="nav_container">
           <div className="nav_button_left">
             <Button className="nav_buttons"onClick={this.handleBackClick} variant="light" >
-              <i class="arrow left"></i>
+              <i className="arrow left"></i>
             </Button>
           </div>
           <div className="Explanation_box">
@@ -288,11 +287,11 @@ class Explanation extends React.Component{
           </div>
           <div className="nav_button">
             <Button className="nav_buttons"onClick={this.handleClick} variant="light" >
-              <i class="arrow right"></i>
+              <i className="arrow right"></i>
             </Button>
           </div>
         </div>
-        <img src={this.state.anime_src} className="SpectreAnime"></img>
+        <img src={this.state.anime_src} className="SpectreAnime" alt=""></img>
       </div>
       
     )

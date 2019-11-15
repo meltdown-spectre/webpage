@@ -1,6 +1,5 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import Meltdownpic from './resources/meltdown.png';
 import caching from "./resources/Meltdown-slides-caching.gif"
 import probing from "./resources/Meltdown-slides-probing.gif"
 import Button from 'react-bootstrap/Button';
@@ -14,10 +13,10 @@ class Meltdown extends React.Component{
     render(){
       return(
       <div>
-          <div classname="menu-item">
+          <div className="menu-item">
             <Sidebar />
           </div>
-            <div class = "text-wrapper">
+            <div className = "text-wrapper">
                 <header className="Headers">Meltdown</header>
                 <p>Discovered and reported independently by 3 teams in 2018, Meltdown is a 
                   hardware issue found in some processors (Intels, ARMs and IBM POWERs) which 
@@ -36,11 +35,11 @@ class Meltdown extends React.Component{
                   So why is Meltdown dangerous? The kernel stores encryption keys, passwords or even physical 
                   pages of other processes. These sensitive data will be compromised due to Meltdown and other 
                   users could potentially use these sensitive information to cause harm to others or to the user 
-                  himself.<br></br>
-                  <div class="SubHeader">
-                    Description
+                  himself.<br></br></p>
+                  <div className="SubHeader">
+                    <p>Description</p>
                   </div>
-                  The full Meltdown attack consists of 2 building blocks:
+                  <p>The full Meltdown attack consists of 2 building blocks:
                   Speculatively executing instructions that should never occur in the executed path.
                   Monitoring the effect of the speculatively executed instructions on the architectural state to 
                   leak the secret. In the first block, these instructions are known as transient instructions and 
@@ -55,18 +54,18 @@ class Meltdown extends React.Component{
                   In the next segment of the attack, due to the (speculative) execution of the instruction that should not have occurred, 
                   there might be a change in the architectural state such as the state of the cache. This change in state will then be passed 
                   through a covert channel and the attacker will be able to deduce what the leaked secret is.
-                  In the next part of the section, we demonstrate a walkthrough of the Meltdown attack.
-                  <div class="SubHeader">
-                  Walkthrough/Demo
+                  In the next part of the section, we demonstrate a walkthrough of the Meltdown attack.</p>
+                  <div className="SubHeader">
+                  <p>Walkthrough/Demo</p>
                   </div>
-                  In this walkthrough, we split the attack into 2 major parts. The first step of the attack uses speculative execution to 
+                  <p>In this walkthrough, we split the attack into 2 major parts. The first step of the attack uses speculative execution to 
                   cause microarchitectural changes such as affecting the state of the cache and the second step would be to observe these changes 
                   using a technique called flush+reload. To understand how we are able to retrieve the kernel memory, we will first have to 
-                  understand the flush+reload technique.
-                  <div class="SubHeader">
-                  Flush + Reload technique
+                  understand the flush+reload technique.</p>
+                  <div className="SubHeader">
+                  <p>Flush + Reload technique</p>
                   </div>
-                  The flush+reload technique allows users to detect if a memory location has been accessed within a period of time. 
+                  <p>The flush+reload technique allows users to detect if a memory location has been accessed within a period of time. 
                   The general idea behind this technique is to observe the differences in the time taken for retrieval of data when a 
                   memory location is accessed the first time and its subsequent accesses. Using this technique, we can observe that 
                   memory access time is slow initially but becomes much faster in the subsequent access of the same memory location. 
@@ -78,19 +77,20 @@ class Meltdown extends React.Component{
                   Using the reasoning above, we will be able to detect if a process uses a memory address. Below describes the detection process:<br></br>
                   1. Suppose we would like to detect if process C accesses/uses the memory location A. <br></br>
                   2. First, we will initialise the cache by flushing A from the cache. We are able to flush the cache using the clflush instruction.
-                  <div class = "code">
+                  </p>
+                  <div className = "code">
                     _mm_clflush(Address[A])
                   </div>
-                  3. Next, we will run the process C. <br></br>
+                  <p>3. Next, we will run the process C. <br></br>
                   4. After C completes its execution, we will access A separately and measure how long it takes to retrieve its value. <br></br>
                   5. This can be done by counting the number of clock cycles it takes to access the memory. We are able to measure the access 
-                  time accurately by finding the difference in time using the rdtsc (read time-stamp counter) instruction. <br></br>
-                  <div class="code">
+                  time accurately by finding the difference in time using the rdtsc (read time-stamp counter) instruction. <br></br></p>
+                  <div className="code">
                     time1 = __rdtscp(&A) <br></br>
                     A    = *addr; // addr: Address of A <br></br>
                     time2 = __rdtscp(&A) - time1;
                   </div>
-                  6. A short access time would mean that C had used A during its execution. <br></br>
+                  <p>6. A short access time would mean that C had used A during its execution. <br></br>
                   7. On the other hand, a long access time would mean that A is not in the cache. 
                   However, we cannot be certain that C did not use A during its execution as it 
                   is also possible that the data were accessed in a way that caused A to be replaced in the cache. <br></br>
@@ -98,24 +98,24 @@ class Meltdown extends React.Component{
                   rdtsc instruction to find out what is the average number of cycles to access cached memory and 
                   the number of cycles to access uncached memory. <br></br>
                   9. After retrieving the average number of cycles, we will set a 'threshold' value for cache access 
-                  cycles, which separates a 'short' and 'long' access. 
-                  <div class="SubHeader">
-                    Speculative execution
+                  cycles, which separates a 'short' and 'long' access. </p>
+                  <div className="SubHeader">
+                    <p>Speculative execution</p>
                   </div>
-                  Moving on, we will observe how speculative execution can cause microarchitectural changes. 
+                  <p>Moving on, we will observe how speculative execution can cause microarchitectural changes. 
                   As mentioned in Section 2, speculative execution is an optimization that modern CPUs use 
                   to maximize the usage of the CPU.<br></br>
-                  Consider the following piece of code that is executed by a user-level process: <br></br>
-                  <div class="code">
+                  Consider the following piece of code that is executed by a user-level process: <br></br></p>
+                  <div className="code">
                     void meltdown_asm(unsigned long kernel_data_addr)&#123; <br></br>
-                    char kernel_data = 0;<br></br>
-                    kernel_data = *(char*)kernel_data_addr; // Line 1. Illegal access, no permission <br></br>
-                    array[kernel_data*4096+DELTA] += 1; // Line 2. Speculatively executed <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;char kernel_data = 0;<br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;kernel_data = *(char*)kernel_data_addr; // Line 1. Illegal access, no permission <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;array[kernel_data*4096+DELTA] += 1; // Line 2. Speculatively executed <br></br>
                     &#125;
                   </div>
-                  Code 2: Meltdown code <br></br>
+                  <p>Code 2: Meltdown code <br></br></p>
                   <br></br>
-                  When the CPU executes line 1, it fetches the data as well as check the access rights of the process 
+                  <p>When the CPU executes line 1, it fetches the data as well as check the access rights of the process 
                   in parallel. If the data returns before the access rights check is complete, the CPU would have all 
                   it needs to execute line 2. Therefore, instead of idling, the processor will speculatively execute 
                   line 2. As such, line 2 will access a memory location based on the data that was read in line 1.<br></br>
@@ -130,27 +130,28 @@ class Meltdown extends React.Component{
                   lines and we are able to deduce that the cache line that has a short access time was accessed. 
                   The accessed cache line was chosen based on the value of kernel_data. Hence, we will be able to determine 
                   what that value was.
-
-                  <div class="code">
+                  </p>
+                  <div className="code">
                     void reloadSideChannel()<br></br>
                     &#123; <br></br>
-                    int junk=0; <br></br>
-                    register uint64_t time1, time2; <br></br>
-                    volatile uint8_t *addr; <br></br>
-                    int i; <br></br>
-                    for&#40;i=0; i&#60;256;i++&#41;&#123; // check which of the 256 cache lines were accessed <br></br>
-                        addr = &array[i*4096 + DELTA]; <br></br>
-                        time1 = __rdtscp(&junk); // calculating the differences in clock cycles <br></br>
-                        junk = *addr; <br></br>
-                        time2 = __rdtscp(&junk) - time1; <br></br>
-                        if &#40;time2 &#60;&#61; CACHE_HIT_THRESHOLD&#41;&#123;  <br></br>
-                    printf&#40;"array[%d*4096 + %d] is in cache.\n", i, DELTA&#41;;<br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int junk=0; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;register uint64_t time1, time2; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;volatile uint8_t *addr; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int i; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for&#40;i=0; i&#60;256;i++&#41;&#123; // check which of the 256 cache lines were accessed <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addr = &array[i*4096 + DELTA]; <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time1 = __rdtscp(&junk); // calculating the differences in clock cycles <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;junk = *addr; <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time2 = __rdtscp(&junk) - time1; <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if &#40;time2 &#60;&#61; CACHE_HIT_THRESHOLD&#41;&#123;  <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf&#40;"array[%d*4096 + %d] is in cache.\n", i, DELTA&#41;;<br></br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br>
                 &#125;
                   </div>
-                  Code 3
                   <br></br>
                   <br></br>
-                  We combine these two parts to get the meltdown attack. In order to demonstrate this attack, 
+                  <p>We combine these two parts to get the meltdown attack. In order to demonstrate this attack, 
                   we planted a secret value inside the kernel using procfs. We will then read the planted secret 
                   from a user-level process using the same techniques above. <br></br>
                       </p>
@@ -240,7 +241,7 @@ class Explanation extends React.Component{
           newBackButtonState = "none"
           newNextButtonState = "block"
           break;
-        case 2 : 
+        default : 
           newState = 1
           newExplanation = this.phase1
           newGif = this.phase1ani
@@ -261,12 +262,11 @@ class Explanation extends React.Component{
   }
   render(){
     return(
-    <p>
       <div className="anime_container">
         <div className="nav_container">
           <div className="nav_button nav_button_left">
             <Button className="nav_buttons"onClick={this.handleBackClick} variant="light" >
-              <i class="arrow left"></i>
+              <i className="arrow left"></i>
             </Button>
           </div>
           <div className="Explanation_box">
@@ -274,14 +274,12 @@ class Explanation extends React.Component{
           </div>
           <div className="nav_button">
             <Button className="nav_buttons"onClick={this.handleClick} variant="light" >
-              <i class="arrow right"></i>
+              <i className="arrow right"></i>
             </Button>
           </div>
         </div>
-        <img src={this.state.anime_src} className="MeltdownAnime"></img>
+        <img src={this.state.anime_src} className="MeltdownAnime" alt=""></img>
       </div>
-      </p>
-      
     )
   }
 
