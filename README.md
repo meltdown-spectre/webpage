@@ -1,16 +1,19 @@
 # Meltdown and Spectre Website
-<h2>Getting Started</h2>
-  <p>
-    Clone or copy files from 'master' branch.
-  </p>
-<h3>Requirements</h3>
-  <p>
-    1. Make sure react.js has been installed (Developed on 16.10.2)</br>
-    2. Make sure npm has been installed (Developed on 6.9.0)</br>
-  </p>
-<h3>Hosting the website</h3>
-  <p>
-    Open Developer Command Prompt and run the following commands: </br>
-    1. npm install </br>
-    2. npm start (website will start on localhost:3000)</br>
-  </p>
+
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+This project requires `Node.js` and `npm`. You can get them [here](https://www.npmjs.com/get-npm).
+Recommend using [Visual Studio Code](https://code.visualstudio.com/) for this project.
+
+### Installing
+1. Clone the repo to your local machine.
+2. Navigate to `my-app` folder.
+3. Open Developer Command Prompt\Terminal in VSCode.
+4. use `npm install` to install the dependency.
+
+## Deployment
+1. Open Developer Command Prompt\Terminal in VSCode.
+2. Run `npm start`
+2. Access the frontend application through http://localhost:3000
