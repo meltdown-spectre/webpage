@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import caching from "./resources/Meltdown-slides-caching.gif"
 import probing from "./resources/Meltdown-slides-probing.gif"
+import meltdownanime from "./resources/MeltdownAnimation.png"
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
@@ -206,12 +207,13 @@ class Explanation extends React.Component{
       this.phase0 = phase0;
       this.phase1 = phase1;
       this.phase2 = phase2;
-      this.phase0ani = null;
+      this.phase0ani = meltdownanime;
       this.phase1ani = caching;
       this.phase2ani = probing;
       this.state = {
         exState : 0,
         explanation : this.phase0,
+        anime_src : this.phase0ani,
         nextButtonState : "block",
         backButtonState : "None"
       }

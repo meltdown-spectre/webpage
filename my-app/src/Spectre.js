@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import branchP from "./resources/Spectre-slides-BP.gif"
 import caching from "./resources/Spectre-slides-caching.gif"
 import probing from "./resources/Spectre-slides-probing.gif"
+import spectreanime from "./resources/SpectreAnimation.png"
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
@@ -175,13 +176,14 @@ class Explanation extends React.Component{
       this.phase1 = phase1;
       this.phase2 = phase2;
       this.phase3 = phase3;
-      this.phase0ani = {};
+      this.phase0ani = spectreanime;
       this.phase1ani = branchP;
       this.phase2ani = caching;
       this.phase3ani = probing;
       this.state = {
         exState : 0,
         explanation : this.phase0,
+        anime_src : this.phase0ani,
         nextButtonState : "block",
         backButtonState : "None"
       }
