@@ -158,7 +158,7 @@ class Meltdown extends React.Component{
                     <p>Meltdown Attack Guide</p>
                   </div>
                   <p>We combined these two parts to get the meltdown attack. You will now get a chance to carry out this attack on your own.
-                  Before we begin, download the 5 files     <Link to="/Meltdown-files.rar" target="_blank" download>here</Link> and place them into the same directory.<br></br><br></br>
+                  Before we begin, download the 5 files <Link to="/Meltdown-files.rar" target="_blank" download>here</Link> and place them into the same directory.<br></br><br></br>
                     <b>Step 1.</b> We first demonstrate a method to measure cache timings. This is straightforward with the use of the clflush 
                     and rdtscp instructions. Open the cacheHitMiss.c file. <br></br><br></br>
                     Compile the program with the "-march=native" flag and run the program a few times. Note that the cache hit generally
