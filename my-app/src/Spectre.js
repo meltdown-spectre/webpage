@@ -55,7 +55,7 @@ class Spectre extends React.Component {
           This variant involves the attacker mistraining the branch predictor into mispredicting the branch.</p>
            <div className="code">
             if (input &#60; array_size) &#123;   #Checks if input in not out of bounds <br></br>
-              val = data[array[input]];  #Read data<br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;val = data[array[input]];  #Read data<br></br>
             &#125;
           </div>
           <p>Using the example given above, the attack can be split into 2 phases: Mistraining phase and 
@@ -114,9 +114,9 @@ class Spectre extends React.Component {
           Suppose the victim has the following code in their program. <br></br></p>
           <div className="code">
               if (x &#60; array_size) &#123; <br></br>
-	            return array[x];<br></br>
+	            &nbsp;&nbsp;&nbsp;&nbsp;return array[x];<br></br>
               &#125;else&#123;<br></br>
-	              return 0;<br></br>
+	              &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br></br>
                 &#125;
           </div>
           <p>We will first train the branch predictor to predict that the if-condition will always 
@@ -124,8 +124,8 @@ class Spectre extends React.Component {
           the array as demonstrated below.<br></br></p>
             <div className="code"> 
             for (i = 0; i &#60; 20; i++) &#123; <br></br>
-              _mm_clflush(& array_size); #flush the values stored in the cache <br></br>
-              victim_code(i); # contains the victim’s code above. Assuming array_size > 20. <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;_mm_clflush(& array_size); #flush the values stored in the cache <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;victim_code(i); # contains the victim’s code above. Assuming array_size > 20. <br></br>
               &#125;
             </div>
           <p>Right after the execution of the code above, we can now input any value larger than the array size. 
@@ -136,19 +136,19 @@ class Spectre extends React.Component {
           contiguous segment of memory by incrementing the value of x. <br></br></p>
           <div className = "code">
           for(int j=0; j&#60;len;j++)&#123; <br></br>
-	              for (i=0; i&#60;256; i++) <br></br>
-                     hits[i] = 0; #number of times the character is found in the cache <br></br>
-	          for (i = 0; i&#60;1000; i++) &#123; <br></br>
-                 spectre_attack(larger_x); # trains the branch predictor and perform attack <br></br>         
-                 reloadSideChannelImproved(); # same method as Meltdown <br></br>
-              &#125; <br></br>
-              int max = 0; <br></br>
-              for (i = 0; i &#60;256; i++)&#123; <br></br>
-		             if(hits[max] &#60;hits[i]) max = i; #find the value with highest number of cache hits <br></br>
-              &#125;
-              printf("Reading secret value at %p = ", (void*)larger_x); <br></br>
-              printf("The secret value is %c\n", max); <br></br>
-              larger_x++; # increment the out of bound value to retrieve the next character <br></br>
+	              &nbsp;&nbsp;&nbsp;&nbsp;for (i=0; i&#60;256; i++) <br></br>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hits[i] = 0; #number of times the character is found in the cache <br></br><br></br>
+	          &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i&#60;1000; i++) &#123; <br></br>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spectre_attack(larger_x); # trains the branch predictor and perform attack <br></br>         
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reloadSideChannelImproved(); # same method as Meltdown <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&#125; <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;int max = 0; <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i &#60;256; i++)&#123; <br></br>
+		             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(hits[max] &#60;hits[i]) max = i; #find the value with highest number of cache hits <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br><br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;printf("Reading secret value at %p = ", (void*)larger_x); <br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;printf("The secret value is %c\n", max); <br></br><br></br>
+              &nbsp;&nbsp;&nbsp;&nbsp;larger_x++; # increment the out of bound value to retrieve the next character <br></br>
             &#125;
           </div>
         <Explanation />

