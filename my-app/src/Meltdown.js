@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import caching from "./resources/Meltdown-slides-caching.gif"
 import probing from "./resources/Meltdown-slides-probing.gif"
+import meltdownanime from "./resources/MeltdownAnimation.png"
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
@@ -158,7 +159,7 @@ class Meltdown extends React.Component{
                     <p>Meltdown Attack Guide</p>
                   </div>
                   <p>We combined these two parts to get the meltdown attack. You will now get a chance to carry out this attack on your own.
-                  Before we begin, download the 5 files     <Link to="/Meltdown-files.rar" target="_blank" download>here</Link> and place them into the same directory.<br></br><br></br>
+                  Before we begin, download the 5 files <Link to="/Meltdown-files.rar" target="_blank" download>here</Link> and place them into the same directory.<br></br><br></br>
                     <b>Step 1.</b> We first demonstrate a method to measure cache timings. This is straightforward with the use of the clflush 
                     and rdtscp instructions. Open the cacheHitMiss.c file. <br></br><br></br>
                     Compile the program with the "-march=native" flag and run the program a few times. Note that the cache hit generally
@@ -206,12 +207,13 @@ class Explanation extends React.Component{
       this.phase0 = phase0;
       this.phase1 = phase1;
       this.phase2 = phase2;
-      this.phase0ani = null;
+      this.phase0ani = meltdownanime;
       this.phase1ani = caching;
       this.phase2ani = probing;
       this.state = {
         exState : 0,
         explanation : this.phase0,
+        anime_src : this.phase0ani,
         nextButtonState : "block",
         backButtonState : "None"
       }

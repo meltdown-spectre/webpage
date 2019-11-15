@@ -3,8 +3,9 @@ import Sidebar from './Sidebar';
 import branchP from "./resources/Spectre-slides-BP.gif"
 import caching from "./resources/Spectre-slides-caching.gif"
 import probing from "./resources/Spectre-slides-probing.gif"
+import spectreanime from "./resources/SpectreAnimation.png"
 import Button from 'react-bootstrap/Button';
-
+import { BrowserRouter as Switch, Link} from 'react-router-dom';
 
 const phase0 = "This is a short animation on how the spectre attack works. Press Right arrow to  continue."
 const phase1 = "Branch prediction"
@@ -155,6 +156,12 @@ class Spectre extends React.Component {
             &#125;
           </div>
           <p>Code 4: Retrieving the secret Code.<br></br></p><br></br>
+          <p>By combining the all the code above, you will be able to perform the Spectre attack. You can download the Spectre attack file 
+          <Link to="/SpectreAttack.c" target="_blank" download> here.</Link><br></br><br></br>
+          Once you compile and run the code, if you see the secret value printed out on your terminal, CONGRATULATIONS!! You have successfully performed a Spectre Variant 1 attack on the kernel memory. <br></br>
+          If you did not manage to see the values of the secret, try compiling and run again. No worries! The secret will be yours soon! <br></br><br></br>
+          We have included an animation of the Spectre vulnerabilities and how it works below. Do take a look at it to understand more about this vulnerability. <br></br><br></br>
+          </p>
         <Explanation />
         </div>
       </div>
@@ -169,13 +176,14 @@ class Explanation extends React.Component{
       this.phase1 = phase1;
       this.phase2 = phase2;
       this.phase3 = phase3;
-      this.phase0ani = {};
+      this.phase0ani = spectreanime;
       this.phase1ani = branchP;
       this.phase2ani = caching;
       this.phase3ani = probing;
       this.state = {
         exState : 0,
         explanation : this.phase0,
+        anime_src : this.phase0ani,
         nextButtonState : "block",
         backButtonState : "None"
       }
